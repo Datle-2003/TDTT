@@ -1,38 +1,7 @@
-O(n.log(n)) + O(nlog(n))
-
-log gcd
-
-(a, b) -> (b, a%b) -> ....
-
-
-b1:
-O(nlog(m)) + O((n - k) * log(n) * log(m))
-m: max(arr)
-
-b2:
-sang: n / 2 + n / 3 + n / 5 + ... = nlog(n)
-mang primes se co n / log(n) phan tu
-
-O(nlog(n)) + O((n / log(n) * log((n / log(n)))))
-            -> O(nlog(n))
-
-
-b3:
-|a + b| = a + b 
-        -a-b
-O(nlogn) + O(mlog(n))
-
-b4: 
-O(nlogn)
-
-
-
-b6: 
-n * log(k)
-
-b7: O(n)
-
-b8: O(N!) -> note giải thích
-
-b9-> giai thich
-
+6 6 2
+1 2 1
+2 3 1
+2 4 1
+2 5 1
+4 5 1
+1 6 1

@@ -1,24 +1,17 @@
-// Cho k dãy gồm các số nguyên đã được sắp xếp sẵn theo thứ tự tăng dần trong mỗi danh sách. Các phần tử trong dãy có thể có cùng giá trị.
-// Yêu cầu: Hãy gộp tất cả k dãy này lại thành một danh sách đã được sắp xếp theo thứ tự tăng dần.
 
 #include "utils.h"
 
-struct Tuple
+struct Node
 {
     int value;
     int listIndex;
     int elementIndex;
 
-    Tuple(int value, int listIndex, int elementIndex) : value(value), listIndex(listIndex), elementIndex(elementIndex) {}
+    Node(int value, int listIndex, int elementIndex) : value(value), listIndex(listIndex), elementIndex(elementIndex) {}
 
-    bool operator>(const Tuple &other) const
+    bool operator>(const Node &other) const
     {
         return value > other.value;
-    }
-
-    bool operator<(const Tuple &other) const
-    {
-        return value < other.value;
     }
 };
 
@@ -43,21 +36,21 @@ void solve()
     }
 
     vector<int> res;
-    priority_queue<Tuple, vector<Tuple>, greater<Tuple>> pq;
+    priority_queue<Node, vector<Node>, greater<Node>> pq;
 
     for (int i = 0; i < input.size(); i++)
     {
-        pq.push(Tuple(input[i][0], i, 0));
+        pq.push(Node(input[i][0], i, 0)); 
     }
 
     while (!pq.empty())
     {
-        Tuple top = pq.top();
+        Node top = pq.top();
         pq.pop();
         res.push_back(top.value);
 
         if (top.elementIndex + 1 < input[top.listIndex].size())
-            pq.push(Tuple(input[top.listIndex][top.elementIndex + 1], top.listIndex, top.elementIndex + 1));
+            pq.push(Node(input[top.listIndex][top.elementIndex + 1], top.listIndex, top.elementIndex + 1));
     }
 
     for (int i = 0; i < res.size(); i++)
@@ -73,3 +66,15 @@ int main()
 
     solve();
 }
+
+/*
+Đề bài: gộp k dãy số đã sắp xếp thành 1 dãy số đã sắp xếp
+
+Ý tưởng: Sử dụng min-heap để lấy ra phần tử nhỏ nhất trong k dãy số đã sắp xếp
+        Sau đó thêm phần tử đó vào dãy số kết quả, thêm phần tử tiếp theo của dãy số đó vào min-heap
+        Lặp lại cho đến khi min-heap rỗng
+
+Độ phức tạp: O(klogk) + O(n*k*logk)
+
+Không gian: O(k)
+*/

@@ -27,7 +27,6 @@ bool topdown(string s, string p, int i, int j, vector<vector<int>> &dp)
 
     if (dp[i][j] != -1)
     {
-        cout << "index" << i << " " << j << endl;
         return dp[i][j];
     }
     bool match = i < s.size() && (s[i] == p[j] || p[j] == '.');
@@ -60,4 +59,21 @@ int main()
     solve();
 }
 
+/*
+Đề bài: Kiểm tra xem một chuỗi có khớp với một biểu thức chính quy hay không
 
+Ý tưởng: 
+Kiểm tra s[i] == p[j] || p[j] == '.'
+    nếu đúng, kiểm tra p[j + 1] == '*'
+        nếu đúng, kiểm tra 2 trường hợp:
+            không dùng * -> i, j + 2
+            dùng * -> i + 1, j
+    Kiểm tra s[i + 1] == p[j + 1]
+        nếu đúng, i + 1, j + 1
+
+Sử dụng dp để giảm số lượng tính toán lại
+
+Thời gian: O(m * n) do mỗi vị trí chỉ cần tính 1 lần
+Độ phức tạp không gian: O(n * m)
+
+*/

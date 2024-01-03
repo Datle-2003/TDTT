@@ -34,7 +34,7 @@ void solve()
         }
     }
 
-    cout << res << endl;
+    cout << res * res << endl;
 }
 
 int main()
@@ -44,3 +44,17 @@ int main()
 
     solve();
 }
+
+/*
+Đề bài: Tìm diện tích hình vuông lớn nhất
+
+Ý tưởng: Sử dụng dp với dp[i][j] là độ dài cạnh hình vuông lớn nhất có đỉnh phải dưới là (i, j)
+        dp[i][j] = 1
+
+        dp[i][j] = min(dp[i - 1][j - 1], dp[i - 1][j], dp[i][j - 1]) + 1 nếu a[i][j] == a[i - 1][j - 1] == a[i - 1][j] == a[i][j - 1]
+
+        Kết quả là max(dp[i][j]) * max(dp[i][j])
+
+Thời gian: O(n * m)
+Độ phức tạp không gian: O(n * m)
+*/

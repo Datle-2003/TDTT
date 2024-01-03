@@ -1,10 +1,8 @@
-// Cho một dãy gồm n số nguyên không âm là giá trị độ cao của một vùng đất. Một cơn mưa đủ nhiều đổ lên vùng đất này và nước còn đọng lại như hình bên dưới. Biết rằng nước có thể chảy về các vị trí thấp hơn kề cạnh nếu mực nước ở vị trí hiện tại lớn hơn vị trí kề cạnh. Hai biên của vùng đất là biển và có mực nước bằng 0.
-
 #include "utils.h"
 
 void solve()
 {
-    string s; 
+    string s;
     cin >> s;
     stringstream ss(s);
     vector<int> a;
@@ -24,7 +22,6 @@ void solve()
     // for each position, trapped water will base on the min of maxLeft and maxRight minus the height of the position
     // if the height of the position is greater than the min of maxLeft and maxRight, then the trapped water will be 0 and update the maxLeft or maxRight
     // if the height of the position is less than the min of maxLeft and maxRight, then the trapped water will be the min of maxLeft and maxRight minus the height of the position
-
 
     while (l <= r)
     {
@@ -53,3 +50,21 @@ int main()
 
     solve();
 }
+
+/*
+Đề bài: Cho một mảng các số nguyên dương, mỗi số nguyên dương là chiều cao của một cột nước.
+Hãy tính tổng lượng nước có thể giữa các cột nước này.
+
+Ý tưởng: Lượng nước ở mỗi vị trí sẽ phụ thuộc vào độ cao lớn nhất của cột nước bên trái và độ cao của cột nước bên phải
+        Và nó bằng min(maxLeft, maxRight) - height[i], nếu nó > 0. Nếu <= 0 thì không có nước đọng ở vị trí đó
+        Ta sẽ tạo 2 mảng maxLeft và maxRight để lưu độ cao lớn nhất bên trái và phải của từng vị trí
+        Sau đó duyệt mảng, tính lượng nước đọng ở mỗi vị trí và cộng dồn vào biến kết quả
+
+    Tuy nhiên, ta có thể cải tiến bằng cách không cần tạo 2 mảng maxLeft và maxRight mà chỉ cần 2 biến maxLeft và maxRight
+    Vì ta chỉ cần min(maxLeft, maxRight) nên tả chỉ cần giá trị nhỏ hơn trong 2 biến maxLeft và maxRight
+    giả sử biến nhỏ hơn là maxLeft, ta cập nhật maxLeft và tính lượng nước đọng ở vị trí đó
+    nếu maxLeft > maxRight thì ta cập nhật maxRight và tính lượng nước đọng ở vị trí đó
+
+    Độ phức tạp: O(n) do sử dụng 2 con trỏ l và r để duyệt mảng, mỗi con trỏ chỉ duyệt các phần tử 1 lần
+    Không gian: O(1) do chỉ sử dụng 2 biến maxLeft và maxRight
+*/

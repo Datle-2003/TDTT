@@ -16,10 +16,10 @@ int main()
     vector<long long> fact(n + 1, 1);
     for (int i = 1; i <= n; i++)
     {
-        fact[i] = fact[i - 1] * i;
+        fact[i] = fact[i - 1] * i; // tính giai thừa
     }
 
-    vector<bool> used(n + 1, 0);
+    vector<bool> used(n + 1, 0); // used[i] = true nếu số i đã được sử dụng
     for (int i = 0; i < n; i++)
     {
         int cnt = 0;
@@ -58,3 +58,4 @@ int main()
     cout << '\n';
     return 0;
 }
+

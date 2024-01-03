@@ -31,24 +31,27 @@ int main()
         adj[u].push_back(v);
         adj[v].push_back(u);
     }
-
-    // the width of a tree is the sum of distances between all pairs of vertices
-    // using dfs, cal number of subnodes of each node(including itself)
-    // the result is ans += (n - subnodes[i]) * subnodes[i]
-    // where i is the root of the tree
-    // why
-    // because the distance between 2 nodes is the number of edges on the path between them
-    // so the distance between 2 nodes is the number of nodes on the path between them - 1
-
     vector<int> subnodes(n, 0);
 
-    dfs(0, -1, adj, subnodes); // root is 0, parent is -1
+    dfs(0, -1, adj, subnodes);
 
     int ans = 0;
     for (int i = 0; i < n; i++)
-    {
         ans += (n - subnodes[i]) * subnodes[i];
-    }
 
     cout << ans << '\n';
 }
+
+/*
+Đề bài: Tìm độ rộng của cây
+
+Ý tưởng: Độ rộng của cây là tổng khoảng cách giữa tất cả cặp đỉnh u, v
+        Sử dụng dfs, tính số lượng đỉnh con của mỗi đỉnh
+        Kết quả là ans += (n - subnodes[i]) * subnodes[i]
+        Trong đó i là đỉnh gốc của cây
+        Tại sao?
+        Vì khoảng cách giữa 2 đỉnh là số cạnh trên đường đi giữa chúng
+        Vậy khoảng cách giữa 2 đỉnh là số đỉnh trên đường đi giữa chúng - 1
+        => Khoảng cách giữa 2 đỉnh là số đỉnh con của đỉnh gốc - 1
+        => Khoảng cách giữa 2 đỉnh là (n - subnodes[i]) * subnodes[i]
+*/

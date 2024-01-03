@@ -69,3 +69,16 @@ int main()
     }
     cout << first + 1 << ' ' << second + 1 << '\n';
 }
+
+/*
+Đề bài: Tìm 2 điểm chia đa giác thành 2 phần có diện tích chênh lệch nhỏ nhất
+
+Ý tưởng: Tính diện tích tam giác, sau đó duyệt qua từng cặp điểm, tính diện tích 2 phần
+        Lấy cặp điểm có diện tích chênh lệch nhỏ nhất
+        Tại đỉnh i = 0, thực hiện chạy con trỏ j cho tới khi diện tích 2 phần lớn hơn diện tích còn lại
+        Tận dụng bước trươc đó, chỉ cần dịch con trỏ i sang phải 1 bước, còn con trỏ j thì vẫn giữ nguyên
+        Khi đó, ta tìm được tất cả cặp điểm có diện tích chênh lệch nhỏ nhất với từng điểm i
+        
+        Độ phức tạp: O(n) do con trỏ i duyệt mảng 1 lần, con trỏ j chạy tối đa n lần    
+        Không gian: O(1)
+*/

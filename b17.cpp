@@ -1,11 +1,5 @@
 #include "utils.h"
 
-// Cho số nguyên dương n. Hãy tìm số nguyên dương m nhỏ nhất có không quá 9 chữ số thỏa m chỉ chứa các chữ số {0,1} và m là bội của n.
-// Dữ liệu vào:
-// Gồm một số nguyên dương nn≤100
-// Kết quả:
-// Gồm một số nguyên duy nhất là m
-
 int main()
 {
     int n;
@@ -33,3 +27,14 @@ int main()
         }
     }
 }
+
+/*
+Đề bài: Cho số nguyên dương n, tìm số nguyên dương m(chỉ chứa 0, 1) nhỏ nhất sao cho m chia hết cho n
+Ý tưởng: Các số từ 1->2^9 ở dạng nhị phân chỉ chứa 0, 1 và có tối đa 9 chữ số
+        Vì vậy, ta có thể duyệt qua các số từ 1->2^9, lấy dạng nhị phân của nó và chuyển sang hệ thập phân, kiểm tra xem số đó có chia hết cho n không
+        Nếu có thì in ra và kết thúc chương trình
+        Nếu không thì tiếp tục duyệt
+Thời gian: O(2^9 * (9 + 9 + 9))
+Không gian: O(1)
+
+*/

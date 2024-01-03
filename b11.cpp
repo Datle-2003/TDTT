@@ -1,8 +1,5 @@
 #include "utils.h"
 
-// Xét k cụm dữ liệu, mỗi cụm dữ liệu được chia thành 2 nhóm: nhóm loại 1 và nhóm loại 2. Cụm dữ liệu thứ i có trọng số các nhóm tương ứng ai,bi. Cần chọn ra n nhóm loại 1 và m nhóm loại 2 trong các cụm dữ liệu để làm mẫu thử với nguyên tắc mỗi cụm dữ liệu chỉ chọn 1 nhóm, do đó n+m≤k.
-// Yêu cầu: Tìm cách chọn các nhóm dữ liệu trong mỗi cụm sao cho tổng trọng số của tất cả các nhóm được chọn là lớn nhất.
-
 int main()
 {
     int k, n, m;
@@ -20,7 +17,7 @@ int main()
         {
             for (int l = 0; l <= t; l++)
             {
-                int idx = i + j + l; // 0-based
+                int idx = i + j + l;
                 if (i + 1 <= n)
                     dp[i + 1][j][l] = max(dp[i + 1][j][l], dp[i][j][l] + a[idx]);
                 if (j + 1 <= m)
@@ -30,9 +27,40 @@ int main()
             }
         }
     }
+    
     cout << dp[n][m][t] << '\n';
     return 0;
 }
+
+/*
+Đề bài: Cho k cụm dữ liệu, mỗi cụm có 2 phần tử. Chọn n phần tử ở cụm 1 và m phần tử ở cụm 2
+
+Ý tưởng: Sử dụng dp 
+        dp[i][j][l]: tổng lớn nhất khi chọn i phần tử ở cụm 1, j phần tử ở cụm 2, bỏ qua l cụm
+
+        + Chọn phần tử ở cụm 1: dp[i + 1][j][l] = max(dp[i + 1][j][l], dp[i][j][l] + a[idx]) 
+        + Chọn phần tử ở cụm 2: dp[i][j + 1][l] = max(dp[i][j + 1][l], dp[i][j][l] + b[idx])
+        + Không chọn phần tử nào: dp[i][j][l + 1] = max(dp[i][j][l + 1], dp[i][j][l])
+
+Độ phức tạp thời gian: O(n * m * t)
+Độ phức tạp không gian: O(n * m * t)
+*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 //k
 // chon n + m 
 // tai i, phan tu dau tien cua ca 2 mang -> toi uu la i - 1, i -2

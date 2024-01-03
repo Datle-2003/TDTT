@@ -59,3 +59,19 @@ int main()
 
     solve();
 }
+
+/*
+Bài toán: Cho một bàn cờ vua kích thước n x n. Hãy đặt n quân hậu vào bàn cờ sao cho không có quân hậu nào ăn được quân hậu khác.
+
+Ý tưởng: Đây là bài toán kinh điển, sử dụng thuật toán backtracking(quay lui)
+        Thuật toán backtracking sẽ duyệt qua tất cả các trường hợp có thể xảy ra
+        Thuật toán bắt đầu bằng cách thử đặt quân hậu vào mỗi ô trên hàng đầu tiên, sau đó tiếp tục đặt ở hàng tiếp theo sao cho không vi phạm ràng buộc
+        Nếu đặt được quân hậu vào hàng cuối cùng thì đây là 1 trường hợp hợp lệ, ngược lại thì không
+        Nếu không đặt được quân hậu vào hàng cuối cùng thì quay lui lại và thử đặt quân hậu vào ô tiếp theo
+
+Độ phức tạp: O(n!). Với mỗi ô trên hàng đầu tiên, ta có n cách đặt quân hậu, với mỗi cách đặt quân hậu trên hàng đầu tiên, ta có n - 1 cách đặt quân hậu trên hàng thứ 2, với mỗi cách đặt quân hậu trên hàng thứ 2, ta có n - 2 cách đặt quân hậu trên hàng thứ 3, v.v...
+            Tổng số cách đặt quân hậu là n * (n - 1) * (n - 2) * ... * 1 = n!
+
+Không gian: O(n^2)
+
+*/

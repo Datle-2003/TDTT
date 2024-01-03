@@ -41,7 +41,42 @@ int main()
         cin >> a[i].x >> a[i].y;
     }
 
-    // first solution, O(n ^ 2)
+   
+
+    vector<tuple<int, int, int>> b;
+    for (int i = 0; i < n; i++)
+        b.push_back(make_tuple(a[i].x, a[i].y, i));
+    tuple<int, int, int> p = b[0];
+    for (int i = 1; i < n; i++)
+    {
+        tuple<int, int, int> q = b[i];
+        if (get<0>(q) < get<0>(p) || (get<0>(q) == get<0>(p) && get<1>(q) < get<1>(p)))
+            p = q;
+    }
+
+    vector<double> cosines(n, 0);
+    unordered_map<double, tuple<int, int, int>> m;
+    for (int i = 1; i < n; i++)
+    {
+        tuple<int, int, int> q = b[i];
+        Point r(get<0>(q), 0);
+        Point p1(get<0>(p), get<1>(p)), q1(get<0>(q), get<1>(q));
+        double cos = cosC(calcDistance(p1, q1), calcDistance(p1, r), calcDistance(q1, r));
+        cosines[i] = cos;
+        m[cos] = q;
+    }
+
+    // sort(cosines.begin(), cosines.end());
+    // double median = cosines[cosines.size() / 2]; // n chẵn -> cosines.size() lẻ -> median là phần tử ở giữa
+    // tuple<int, int, int> q = m[median];
+
+
+    tuple<int, int, int> q = m[median];
+
+    cout << get<2>(p) + 1 << " " << get<2>(q) + 1 << endl;
+}
+
+ // first solution, O(n ^ 2)
     //  Point p = a[0];
 
     // for (int i = 1; i < n; i++)
@@ -70,31 +105,20 @@ int main()
 
     // second solution, O(n log n)
 
-    vector<tuple<int, int, int>> b;
-    for (int i = 0; i < n; i++)
-    {
-        b.push_back(make_tuple(a[i].x, a[i].y, i)); 
-    }
+/*
+Đề bài: cho n điểm, n chẵn trên một mp, tìm 2 điểm sao cho đường thẳng đi qua 2 điểm đó cắt nửa mp thành 2 nửa có số điểm mỗi bên bằng nhau
 
-    sort(b.begin(), b.end(), [](tuple<int, int, int> &u, tuple<int, int, int> &v)
-         { return get<0>(u) < get<0>(v) || (get<0>(u) == get<0>(v) && get<1>(u) < get<1>(v)); });
+Ý tưởng: Vì n chẵn, suy ra khi ta chọn 1 điểm bất kỳ thì sẽ có một điểm nào đó ở trong tập điểm còn lại có thể kết hợp với điểm chọn ban đầu để chia
+        mp thành 2 nửa có số điểm bằng nhau. Vì vậy, ta có thể chọn điểm đầu tiên bất kỳ, sau đó duyệt qua các điểm còn lại, Lần lượt kiểm tra các điểm trong
+        tập còn lại có thể kết hợp với điểm đầu tiên để chia mp thành 2 nửa có số điểm bằng nhau hay không. Nếu có thì in ra 2 điểm đó, kết thúc chương trình.
+        Đường có thể chia mp thành 2 nửa có số điểm bằng nhau khi số điểm tạo bởi q, p, r theo chiều kim đồng hồ bằng số điểm tạo bởi q, p, r theo chiều ngược kim đồng hồ.
 
-    tuple<int, int, int> p = b[0];
-    vector<double> cosines(n, 0);
-    map<double, tuple<int, int, int>> m;
-    for (int i = 1; i < n; i++)
-    {
-        tuple<int, int, int> q = b[i];
-        Point r(get<0>(q), 0);
-        Point p1(get<0>(p), get<1>(p)), q1(get<0>(q), get<1>(q));
-        double cos = cosC(calcDistance(p1, q1), calcDistance(p1, r), calcDistance(q1, r));
-        cosines[i] = cos;
-        m[cos] = q;
-    }
+    Độ phức tạp thời gian: O(n^2)
+    Không gian: O(1)
 
-    sort(cosines.begin(), cosines.end());
-    double median = cosines[cosines.size() / 2]; // n chẵn -> cosines.size() lẻ -> median là phần tử ở giữa
-    tuple<int, int, int> q = m[median];
+    Cải tiến:
+*/
 
-    cout << get<2>(p) + 1 << " " << get<2>(q) + 1 << endl;
-}
+
+
+

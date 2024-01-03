@@ -1,8 +1,5 @@
 #include "utils.h"
 
-// Gọi gn là số lượng các cặp p,q khác nhau sao cho p+q=2×n và p,q là nguyên tố. Hai cặp được gọi là khác nhau nếu 1 trong 2 số tham gia vào cặp này và không tham gia vào cặp còn lại. Cho số nguyên n. Hãy tính giá trị biểu thức: fn=g2+g3+…+gn.
-// sang nguyen to
-
 void solve()
 {
     int n;
@@ -22,12 +19,7 @@ void solve()
     for (int i = 3; i <= 2 * n; i++)
         if (isPrime[i])
             primes.push_back(i);
-
     int ans = 1; // g2
-
-    // 3 5 7 11 13 17
-    // n = 4
-
     for (int i = 0; i < primes.size(); i++)
     {
         int p = primes[i];
@@ -57,3 +49,26 @@ int main()
 
     return 0;
 }
+
+
+
+
+
+
+/*
+
+Đề bài: g(n) = số lượng (p, q) thỏa p + q = 2 * n và p, q là số nguyên tố
+        tìm f(n) = g(2) + g(3) + ... + g(n)
+    
+Ý tưởng: Tìm các số nguyên tố từ 2 đến 2 * n
+        Tạo được một mảng primes[] chứa các số nguyên tố từ 2 đến 2 * n
+        Duyệt 1 vòng lặp, mới mỗi số nguyên tố p, tìm số nguyên tố lớn nhất q sao cho p + q = 2 * n
+        Khi đó, số lượng cặp (p, q) thỏa mãn là số lượng số nguyên tố trong đoạn [p, q]
+        do primes[] đã được sắp xếp tăng dần, ta có thể dùng binary search để tìm số lượng số nguyên tố trong đoạn [p, q]
+        Sau đó, cộng số lượng số nguyên tố trong đoạn [p, q] vào kết quả
+
+Độ phức tạp: O(nlogn) + O(n) + O((n / logn) * log(n / logn))
+            -> O(nlogn) + O(n)
+
+Không gian: O(n) + O(n/logn)
+*/

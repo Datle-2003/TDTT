@@ -51,3 +51,15 @@ int main()
 
     solve();
 }
+
+
+/*
+Đề bài: Cho diện tích S của hình vuông, tìm tọa độ 4 đỉnh
+
+Ý tưởng: Tìm a, b sao cho a ^ 2 + b ^ 2 = S, nếu tồn tại thì có hình vuông thỏa mãn
+        Lấy bất kỳ 1 điểm, tìm được 3 điểm còn lại
+
+Độ phức tạp thời gian: O(sqrt(S))
+Độ phức tạp không gian: O(1)
+
+*/
