@@ -48,6 +48,7 @@ int main()
     for (int i = 0; i < n; i++)
     {
         ans += (n - subnodes[i]) * subnodes[i];
+        cout << subnodes[i] << " " << ans << "\n";
     }
 
     cout << ans << '\n';

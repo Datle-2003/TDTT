@@ -9,6 +9,24 @@
 
 #include "utils.h"
 
+void dfs(vector<vector<int>> adj, int u, vector<bool> &visited, int& count){
+    visited[u] = true;
+    count++;
+    for(int i = 0; i < adj[u].size(); i++)
+        if(!visited[adj[u][i]])
+            dfs(adj, adj[u][i], visited, count);
+}
+int countDisconnectedVertices(vector<vector<int>> adj, int u, int v){
+    int n = adj.size();
+    vector<bool> visited(n, 0);
+    int count = 0;
+    dfs(adj, v, visited, count);
+    if(visited[u])
+        return 0;// graph is still connected because u and v still connects
+    else
+        return count * (n - count);// graph is divided into 2 connected subgraph
+}
+
 int main()
 {
     freopen("input.txt", "r", stdin);
@@ -23,11 +41,28 @@ int main()
     {
         int u, v;
         cin >> u >> v;
-        u--;
-        v--;
+        // u--
+        // v-- // if u,v starts from 1 
         adj[u].push_back(v);
         adj[v].push_back(u);
     }
 
-    
+    int res = 0;
+    for(int u = 0; u < n; u++){
+        for(int i = 0; i < adj[u].size(); i++){
+            int v = adj[u][i];
+            auto upos = find(adj[v].begin(), adj[v].end(), u);
+            // count only if u < v to avoid repetition (undirected graph)
+            if(u > v)
+                continue;
+            // remove (u, v) and (v, u)
+            adj[u].erase(adj[u].begin() + i);
+            adj[v].erase(upos);
+            // count when (u, v) is removed
+            cout << countDisconnectedVertices(adj, u, v) << "\n";
+            // insert (u, v) and (v, u) back
+            adj[v].insert(upos, u);
+            adj[u].insert(adj[u].begin() + i, v); 
+        }
+    }
 }
