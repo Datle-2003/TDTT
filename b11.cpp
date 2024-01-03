@@ -5,39 +5,31 @@
 
 int main()
 {
+    freopen("input.txt", "r", stdin);
+    freopen("output.txt", "w", stdout);
     int k, n, m;
     cin >> k >> n >> m;
-    int t = k - n - m;
-    vector<int> a(k), b(k);
-    for (int i = 0; i < k; i++)
-    {
+    vector<int> a(k + 1), b(k + 1);
+    for (int i = 1; i <= k; i++){
         cin >> a[i] >> b[i];
     }
-    vector<vector<vector<int>>> dp(n + 1, vector<vector<int>>(m + 1, vector<int>(t + 1, 0)));
-    for (int i = 0; i <= n; i++)
-    {
-        for (int j = 0; j <= m; j++)
-        {
-            for (int l = 0; l <= t; l++)
-            {
-                int idx = i + j + l; // 0-based
-                if (i + 1 <= n)
-                    dp[i + 1][j][l] = max(dp[i + 1][j][l], dp[i][j][l] + a[idx]);
-                if (j + 1 <= m)
-                    dp[i][j + 1][l] = max(dp[i][j + 1][l], dp[i][j][l] + b[idx]);
-                if (l + 1 <= t)
-                    dp[i][j][l + 1] = max(dp[i][j][l + 1], dp[i][j][l]);
+    vector<vector<vector<int>>> dp(k + 1, vector<vector<int>>(n + 1, vector<int>(m + 1, 0)));
+    for (int i = 1; i <= k; i++){
+        for (int j = 0; j <= n; j++){
+            for (int l = 0; l <= m; l++){
+
+                if(j + l > i)
+                    continue;
+                if(j > 0)
+                    dp[i][j][l] = max(dp[i][j][l], dp[i - 1][j - 1][l] + a[i]);
+                if(l > 0)
+                    dp[i][j][l] = max(dp[i][j][l], dp[i - 1][j][l - 1] + b[i]);
+                if(j + l <= i - 1)
+                    dp[i][j][l] = max(dp[i][j][l], dp[i - 1][j][l]);
             }
         }
     }
-    cout << dp[n][m][t] << '\n';
+
+    cout << dp[k][n][m] << '\n';
     return 0;
 }
-//k
-// chon n + m 
-// tai i, phan tu dau tien cua ca 2 mang -> toi uu la i - 1, i -2
-// dp[i][m][n]: tong lon nhat cua i phan tu dau tien trong mang, m phan tu mang thu nhat , n phan tu mang 2
-// dp[i + 1][j][k]: 
-// + chon phan tu o vi tri thu i cua mang a
-// + chon phan tu o vi tri thu i cua mang b
-// + khong chon phan tu o vi tri thu i cua mang nao ca
